@@ -115,8 +115,9 @@ public class GamePlay implements GamePlayInterface {
     @Override
     public boolean levelUp(Character character) {
         if(character.experience >= character.pointsPerLevel) {
-            if(character.experience == character.pointsPerLevel)
-                character.experience += 5;
+            if(character.experience == character.pointsPerLevel) {
+                character.experience = character.pointsPerLevel + 5;
+            }
 
             character.level++;
             character.pointsPerLevel *= 2; // need more points to level up next time
