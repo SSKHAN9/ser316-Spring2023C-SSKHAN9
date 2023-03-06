@@ -50,8 +50,7 @@ public class GamePlay implements GamePlayInterface {
      */
     @Override
     public boolean addOpponent(Character opponent) {
-        if (this.Opponents.add(opponent)) return true;
-        else return false;
+        return this.Opponents.add(opponent);
     }
 
     /**
