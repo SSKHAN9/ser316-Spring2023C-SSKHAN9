@@ -1,10 +1,11 @@
+package main.java;
+
 import java.util.*;
 
 public class GamePlay implements GamePlayInterface {
     
     public Character player;
     public List<Character> Opponents;
-    public List<Character> remove;
     
     /**
      * Default constructor for Game Play.
@@ -21,7 +22,7 @@ public class GamePlay implements GamePlayInterface {
     public GamePlay(Character character) {
         this.player = character;
         this.Opponents = new LinkedList<>();
-        addOpponent(new Wizard());
+        this.Opponents.add(new Wizard());
         this.Opponents.add(new Bard());
         this.Opponents.add(new Druid());
         this.Opponents.add(new Rogue());
@@ -50,8 +51,7 @@ public class GamePlay implements GamePlayInterface {
      */
     @Override
     public boolean addOpponent(Character opponent) {
-        if (this.Opponents.add(opponent)) return true;
-        else return false;
+       return Opponents.add(opponent);
     }
 
     /**
@@ -62,10 +62,14 @@ public class GamePlay implements GamePlayInterface {
      */
     @Override
     public boolean removeOpponent(Character opponent) {
-        if (this.Opponents.remove(opponent))
-            return true;
-        else
-            return false;
+    	boolean removed = false;
+    	for (int o=0; o < Opponents.size(); o++) {
+            if (Opponents.get(o).getClass().getName() == opponent.getClass().getName()) {
+                Opponents.remove(o);
+                removed = true;
+            }
+        }
+            return removed;
     }
 
     /**
@@ -78,8 +82,21 @@ public class GamePlay implements GamePlayInterface {
      */
     @Override
     public int dealDamage(Character character) {
-    System.out.println("Not Implemented here, your job in assign 3");
-    return 1;
+    	int damage = 0;
+        
+        if (character.health > 0) { // check if attacker has more than 0 health
+            if (character.health < 10) { // if attacker's health is less than 10, deal double damage
+                damage = character.damage * 2;
+            } else {
+                damage = character.damage;
+            }
+            
+            if (character.health > 0) {
+                character.experience += 10; // add 10 experience points to the attacker
+            }
+        }
+        
+        return damage;
     }
 
     /**
@@ -102,8 +119,28 @@ public class GamePlay implements GamePlayInterface {
      */
     @Override
     public int takeDamage(Character character, int blowDamage) {
-        System.out.println("Not Implemented here your job in assign 3");
-        return 1;
+    	
+    	int damageTaken = 0;
+    	
+    	if (character.health > 0) {
+    	
+    	int protection = character.protection;
+        int difference = Math.max(blowDamage - protection, 0);
+        damageTaken = Math.min(difference, character.health);
+        
+        if (protection >= blowDamage) { // character's protection is higher than the blowDamage
+            int healing = (protection - blowDamage) / 2;
+            character.health += Math.floor(healing);
+            character.experience += (protection - blowDamage);
+        } else { // character's protection is lower or equal to the blowDamage
+            int experience = (blowDamage - protection) / 2;
+            character.health -= damageTaken;
+            character.experience += experience;
+        }
+    	
+    	}
+        
+        return damageTaken;
     }
 
     /**
@@ -115,7 +152,9 @@ public class GamePlay implements GamePlayInterface {
      */
     @Override
     public boolean levelUp(Character character) {
+        boolean upgrade = false; //added boolean to return true if character levels up
         if(character.experience >= character.pointsPerLevel) {
+        	upgrade = true;
             if(character.experience == character.pointsPerLevel)
                 character.experience += 5;
 
@@ -154,8 +193,8 @@ public class GamePlay implements GamePlayInterface {
             }
             levelUp(character);
         }
-        boolean test;
-        return test = false;
+
+        return upgrade;
     }
 
     /**
@@ -183,7 +222,26 @@ public class GamePlay implements GamePlayInterface {
      */
     @Override
     public void attack(Character character, Character opponent) {
-        System.out.println("Not Implemented here your job in assign 3");
+    	if (character.health > 0 && opponent.health > 0) {
+            int damageDealt = dealDamage(character);
+            int damageTaken = takeDamage(opponent, damageDealt);
+            levelUp(character);
+            if (opponent.health <= 0) {
+            	opponent.health = 0;
+            }
+            if (opponent.health > 0) {
+            levelUp(opponent);
+            damageDealt = dealDamage(opponent);
+            damageTaken = takeDamage(character, damageDealt);
+            levelUp(opponent);
+            }
+            if (character.health <= 0) {
+            	character.health = 0;
+            }
+            if (character.health > 0) {
+            	levelUp(character);
+            }
+        }
     }
 
     /**

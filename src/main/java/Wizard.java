@@ -1,3 +1,5 @@
+package main.java;
+
 public class Wizard extends Character {
 
     public Wizard() {

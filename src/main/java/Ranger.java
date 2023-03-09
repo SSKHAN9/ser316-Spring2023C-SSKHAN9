@@ -1,3 +1,5 @@
+package main.java;
+
 public class Ranger extends Character {
 
     public Ranger() {
