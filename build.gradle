@@ -8,7 +8,6 @@ apply plugin: 'jacoco'
 
 mainClassName = 'Main'
 
-
 // In this section you declare where to find the dependencies of your project
 repositories {
     jcenter()
@@ -20,17 +19,18 @@ dependencies {
     implementation files('cls/')
 }
 
+test {
+    exclude '**/BlackBoxGiven.class'
+}
+
 jacocoTestReport {
     dependsOn test // tests are required to run before generating the report
 }
-
 
 jacoco {
     toolVersion = "0.8.8"
     reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
 }
-
-
 
 jacocoTestReport {
     reports {
@@ -39,6 +39,7 @@ jacocoTestReport {
         html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
     }
 }
+
 
 ///////////////////////////////////////////////////////////////////////
 // Configure Checkstyle
