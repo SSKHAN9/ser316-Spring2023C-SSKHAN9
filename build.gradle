@@ -1,13 +1,12 @@
 plugins {
-//     id "com.github.spotbugs" version "5.0.12"
-//     id "checkstyle"
+     id "com.github.spotbugs" version "5.0.12"
+     id "checkstyle"
 }
 
 apply plugin: 'application'
 apply plugin: 'jacoco'
 
 mainClassName = 'Main'
-
 
 // In this section you declare where to find the dependencies of your project
 repositories {
@@ -20,6 +19,10 @@ dependencies {
     implementation files('cls/')
 }
 
+test {
+    exclude '**/BlackBoxGiven.class'
+}
+
 jacocoTestReport {
     dependsOn test // tests are required to run before generating the report
 }
@@ -30,8 +33,6 @@ jacoco {
     reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
 }
 
-
-
 jacocoTestReport {
     reports {
         xml.required = false
@@ -40,39 +41,40 @@ jacocoTestReport {
     }
 }
 
+
 ///////////////////////////////////////////////////////////////////////
 // Configure Checkstyle
 /////////////////////////////////////////////////////////////////////
-// apply plugin: 'checkstyle'
-// checkstyle {
-//   // Keep checkstyle a little quieter
-//   ignoreFailures = true
-//   showViolations = false
-// }
+ apply plugin: 'checkstyle'
+ checkstyle {
+   // Keep checkstyle a little quieter
+   ignoreFailures = true
+   showViolations = false
+ }
 
-// tasks.withType(Checkstyle) {
-//   reports {
-//     html.enabled = true
-//     xml.enabled = false
-//   }
-// }
-// checkstyle {
-//     toolVersion = "8.8"
-// }
+ tasks.withType(Checkstyle) {
+   reports {
+     html.enabled = true
+     xml.enabled = false
+   }
+ }
+ checkstyle {
+     toolVersion = "8.8"
+ }
 
 
 ///////////////////////////////////////////////////////////////////////
 // Configure SpotBugs
 ///////////////////////////////////////////////////////////////////////
 // To generate an HTML report instead of XML
-// spotbugsMain {
-//     reports {
-//         xml.enabled = false
-//         html.enabled = true
-//     }
-// }
-// spotbugs {
-//     ignoreFailures = true
-//     showProgress = true
-//     effort = 'max'
-// }
+ spotbugsMain {
+     reports {
+         xml.enabled = false
+         html.enabled = true
+     }
+ }
+ spotbugs {
+     ignoreFailures = true
+     showProgress = true
+     effort = 'max'
+ }
