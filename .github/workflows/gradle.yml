@@ -9,27 +9,9 @@ name: Java CI with Gradle
 
 on:
   push:
-<<<<<<< HEAD
-<<<<<<< HEAD
-    branches: [ "StaticAnalysis" ]
+    branches: [ "Dev" ]
   pull_request:
-    branches: [ "StaticAnalysis" ]
-=======
-    branches: [ "Whitebox" ]
-  pull_request:
-    branches: [ "Whitebox" ]
->>>>>>> e1c865f4f0dd1cf6b9e16b1f8a2d2589afae4b52
-=======
-<<<<<<< HEAD
-    branches: [ "Review" ]
-  pull_request:
-    branches: [ "Review" ]
-=======
-    branches: [ "Blackbox" ]
-  pull_request:
-    branches: [ "Blackbox" ]
->>>>>>> origin/Dev
->>>>>>> Dev
+    branches: [ "Dev" ]
 
 permissions:
   contents: read
