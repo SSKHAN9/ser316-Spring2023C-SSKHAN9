@@ -27,7 +27,6 @@ jacocoTestReport {
     dependsOn test // tests are required to run before generating the report
 }
 
-
 jacoco {
     toolVersion = "0.8.8"
     reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
@@ -47,7 +46,11 @@ jacocoTestReport {
 /////////////////////////////////////////////////////////////////////
  apply plugin: 'checkstyle'
  checkstyle {
+<<<<<<< HEAD
+  // Keep checkstyle a little quieter
+=======
    // Keep checkstyle a little quieter
+>>>>>>> Dev
    ignoreFailures = true
    showViolations = false
  }

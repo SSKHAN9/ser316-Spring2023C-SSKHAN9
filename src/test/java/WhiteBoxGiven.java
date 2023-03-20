@@ -1,19 +1,11 @@
-package test.java;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import main.java.Character;
-import main.java.GamePlay;
-import main.java.Wizard;
-import main.java.Barbarian;
-import main.java.Bard;
-import main.java.Druid;
-import main.java.Ranger;
-import main.java.Rogue;
-
-import static org.junit.Assert.*;
 
 public class WhiteBoxGiven {
 
@@ -28,7 +20,7 @@ public class WhiteBoxGiven {
 
     // simple attack test with test of experience after attack
     @Test
-    public void equalDP() {
+    public void equalDp() {
         Character wiz1 = new Wizard();
         Character wiz2 = new Wizard();
 
@@ -52,14 +44,15 @@ public class WhiteBoxGiven {
         GamePlay game = new GamePlay(new Barbarian());
         assertEquals(100, game.play());
     }
-    
- // Test the GamePlay() constructor
+
+    //Test the GamePlay() constructor
+
     @Test
     public void testGamePlayDefaultConstructor() {
         GamePlay game = new GamePlay();
         assertNotNull(game.player);
-        assertNotNull(game.Opponents);
-        assertEquals(6, game.Opponents.size());
+        assertNotNull(game.opponents);
+        assertEquals(6, game.opponents.size());
     }
     
     // Test the GamePlay(Character character) constructor
@@ -68,8 +61,8 @@ public class WhiteBoxGiven {
         Barbarian barbarian = new Barbarian();
         GamePlay game = new GamePlay(barbarian);
         assertEquals(barbarian, game.player);
-        assertNotNull(game.Opponents);
-        assertEquals(6, game.Opponents.size());
+        assertNotNull(game.opponents);
+        assertEquals(6, game.opponents.size());
     }
     
     // Test the GamePlay(Character character, Character opponent) constructor
@@ -79,9 +72,9 @@ public class WhiteBoxGiven {
         Wizard wizard = new Wizard();
         GamePlay game = new GamePlay(barbarian, wizard);
         assertEquals(barbarian, game.player);
-        assertNotNull(game.Opponents);
-        assertEquals(1, game.Opponents.size());
-        assertEquals(wizard, game.Opponents.get(0));
+        assertNotNull(game.opponents);
+        assertEquals(1, game.opponents.size());
+        assertEquals(wizard, game.opponents.get(0));
     }
     
     // Test the addOpponent() method
@@ -90,8 +83,8 @@ public class WhiteBoxGiven {
         GamePlay game = new GamePlay();
         Wizard wizard = new Wizard();
         assertTrue(game.addOpponent(wizard));
-        assertEquals(7, game.Opponents.size());
-        assertTrue(game.Opponents.contains(wizard));
+        assertEquals(7, game.opponents.size());
+        assertTrue(game.opponents.contains(wizard));
     }
     
     // Test the removeOpponent() method
@@ -100,8 +93,8 @@ public class WhiteBoxGiven {
         GamePlay game = new GamePlay();
         Wizard wizard = new Wizard();
         assertTrue(game.removeOpponent(wizard));
-        assertEquals(5, game.Opponents.size());
-        assertFalse(game.Opponents.contains(wizard));
+        assertEquals(5, game.opponents.size());
+        assertFalse(game.opponents.contains(wizard));
     }
 
     @Test

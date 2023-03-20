@@ -1,13 +1,50 @@
-
 import static org.junit.Assert.assertEquals;
 
+import java.lang.reflect.Constructor;
+import java.util.Arrays;
+import java.util.Collection;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
 
-public class TDD {
+@RunWith(Parameterized.class)
+public class BlackBoxGiven {
 
-    GamePlay game = new GamePlay();
+    private Class<GamePlay> classUnderTest;
 
+    @SuppressWarnings("unchecked")
+    public BlackBoxGiven(Object classUnderTest) {
+        this.classUnderTest = (Class<GamePlay>) classUnderTest;
+    }
+
+    // Define all classes to be tested
+    @Parameterized.Parameters
+    public static Collection<Object[]> cartClassUnderTest() {
+        Object[][] classes = {
+                {GamePlay1.class},
+                {GamePlay2.class},
+                {GamePlay3.class},
+                {GamePlay4.class},
+                {GamePlay5.class}
+        };
+        return Arrays.asList(classes);
+    }
+
+    private GamePlay createGame() throws Exception {
+        Constructor<GamePlay> constructor = classUnderTest.getConstructor();
+        return constructor.newInstance();
+    }
+
+    GamePlay game;
+
+    @org.junit.Before
+    public void setUp() throws Exception {
+        game = createGame();
+    }
+
+
+    // normal experience when healthy
     @Test
     public void dealtDamageNormalExperience() {
         final Wizard wiz = new Wizard();
@@ -18,34 +55,34 @@ public class TDD {
         final Rogue ro = new Rogue();
 
         game.dealDamage(wiz);
-        assertEquals(wiz.experience, 10);
+        assertEquals(wiz.experience, 5);
 
         game.dealDamage(bar);
         assertEquals(bar.experience, 10);
 
         game.dealDamage(bard);
-        assertEquals(bard.experience, 10);
+        assertEquals(bard.experience, 6);
 
         game.dealDamage(dru);
-        assertEquals(dru.experience, 10);
+        assertEquals(dru.experience, 7);
 
         game.dealDamage(ran);
-        assertEquals(ran.experience, 10);
+        assertEquals(ran.experience, 8);
 
         game.dealDamage(ro);
-        assertEquals(ro.experience, 10);
+        assertEquals(ro.experience, 5);
     }
 
     // Test case 1: Test dealDamage with health > 0
     @Test
     public void testDealDamage_HealthGreaterThanZero() {
-        Character character = new Wizard();
+        Character character = new Character();
         character.health = 20;
         character.damage = 5;
         character.experience = 0;
         int damage = game.dealDamage(character);
         assertEquals(5, damage);
-        assertEquals(10, character.experience);
+        assertEquals(5, character.experience);
     }
 
     // Test case 2: Test dealDamage with health = 10
@@ -57,7 +94,7 @@ public class TDD {
         character.experience = 0;
         int damage = game.dealDamage(character);
         assertEquals(5, damage);
-        assertEquals(10, character.experience);
+        assertEquals(5, character.experience);
     }
 
     // Test case 3: Test dealDamage with health < 10
@@ -69,7 +106,7 @@ public class TDD {
         character.experience = 0;
         int damage = game.dealDamage(character);
         assertEquals(10, damage);
-        assertEquals(10, character.experience);
+        assertEquals(5, character.experience);
     }
 
     // Test case 4: Test takeDamage with protection > blowDamage
@@ -80,9 +117,9 @@ public class TDD {
         character.protection = 5;
         character.experience = 0;
         int damageTaken = game.takeDamage(character, 3);
-        assertEquals(0, damageTaken);
-        assertEquals(2, character.experience);
-        assertEquals(21, character.health);
+        assertEquals(3, damageTaken);
+        assertEquals(3, character.experience);
+        assertEquals(20, character.health);
     }
 
     // Test case 5: Test takeDamage with protection < blowDamage
@@ -95,7 +132,7 @@ public class TDD {
         int damageTaken = game.takeDamage(character, 10);
         assertEquals(5, damageTaken);
         assertEquals(2, character.experience);
-        assertEquals(15, character.health);
+        assertEquals(10, character.health);
     }
 
     // Test case 6: Test takeDamage with negative damageTaken
@@ -106,9 +143,9 @@ public class TDD {
         character.protection = 5;
         character.experience = 0;
         int damageTaken = game.takeDamage(character, 2);
-        assertEquals(0, damageTaken);
-        assertEquals(3, character.experience);
-        assertEquals(21, character.health);
+        assertEquals(2, damageTaken);
+        assertEquals(-2, character.experience);
+        assertEquals(20, character.health);
     }
 
     // Test case 7: Test takeDamage with zero damageTaken
@@ -120,8 +157,8 @@ public class TDD {
         character.experience = 0;
         int damageTaken = game.takeDamage(character, 0);
         assertEquals(0, damageTaken);
-        assertEquals(5, character.experience);
-        assertEquals(22, character.health);
+        assertEquals(0, character.experience);
+        assertEquals(20, character.health);
     }
 
     // Test case 8: Test takeDamage with damageTaken greater than character health
@@ -133,7 +170,7 @@ public class TDD {
         character.experience = 0;
         int damageTaken = game.takeDamage(character, 25);
         assertEquals(20, damageTaken);
-        assertEquals(10, character.experience);
+        assertEquals(-5, character.experience);
         assertEquals(0, character.health);
     }
 
@@ -146,7 +183,7 @@ public class TDD {
         character.experience = 0;
         int damageTaken = game.takeDamage(character, 10);
         assertEquals(10, damageTaken);
-        assertEquals(5, character.experience);
+        assertEquals(-10, character.experience);
         assertEquals(0, character.health);
     }
 
@@ -159,8 +196,8 @@ public class TDD {
         character.experience = 0;
         int damageTaken = game.takeDamage(character, 15);
         assertEquals(10, damageTaken);
-        assertEquals(7, character.experience);
-        assertEquals(0, character.health);
+        assertEquals(-5, character.experience);
+        assertEquals(-5, character.health);
     }
 
     // Test case 11: Test attack with both characters alive
@@ -176,7 +213,7 @@ public class TDD {
         character2.experience = 0;
         game.attack(character1, character2);
         assertEquals(15, character2.health);
-        assertEquals(12, character1.experience);
+        assertEquals(5, character1.experience);
     }
 
     // Test case 12: Test attack with target dead
@@ -223,7 +260,7 @@ public class TDD {
         character2.experience = 0;
         game.attack(character1, character2);
         assertEquals(15, character2.health);
-        assertEquals(11, character1.experience);
+        assertEquals(5, character1.experience);
     }
 
     // Test case 15: Test attack with both characters alive and protection
@@ -239,8 +276,8 @@ public class TDD {
         character2.damage = 3;
         character2.experience = 0;
         game.attack(character1, character2);
-        assertEquals(15, character2.health);
-        assertEquals(10, character1.experience);
+        assertEquals(18, character2.health);
+        assertEquals(5, character1.experience);
     }
 
     // Test case 16: Test attack with one character dead
@@ -292,7 +329,7 @@ public class TDD {
         character.experience = 0;
         int damageTaken = game.takeDamage(character, 3);
         assertEquals(0, damageTaken);
-        assertEquals(0, character.experience);
+        assertEquals(-3, character.experience);
         assertEquals(0, character.health);
     }
 
@@ -305,7 +342,7 @@ public class TDD {
         character.experience = 0;
         int damageTaken = game.takeDamage(character, 10);
         assertEquals(0, damageTaken);
-        assertEquals(0, character.experience);
+        assertEquals(-5, character.experience);
         assertEquals(-5, character.health);
     }
 
@@ -322,8 +359,8 @@ public class TDD {
         character2.experience = 0;
         game.attack(character1, character2);
         assertEquals(1, character1.health);
-        assertEquals(0, character2.health);
-        assertEquals(10, character1.experience);
+        assertEquals(5, character2.health);
+        assertEquals(0, character1.experience);
         assertEquals(5, character2.experience);
     }
 
@@ -339,10 +376,10 @@ public class TDD {
         character2.damage = 5;
         character2.experience = 0;
         game.attack(character1, character2);
-        assertEquals(1, character1.health);
+        assertEquals(0, character1.health);
         assertEquals(0, character2.health);
-        assertEquals(10, character1.experience);
-        assertEquals(5, character2.experience);
+        assertEquals(0, character1.experience);
+        assertEquals(0, character2.experience);
     }
 
     // Test case 1: Take damage less than health when health = 9
@@ -353,9 +390,9 @@ public class TDD {
         character.protection = 3;
         character.experience = 0;
         int damageTaken = game.takeDamage(character, 4);
-        assertEquals(1, damageTaken);
+        assertEquals(4, damageTaken);
         assertEquals(0, character.experience);
-        assertEquals(8, character.health);
+        assertEquals(5, character.health);
     }
 
     // Test case 2: Take damage equal to health when health = 9
@@ -367,8 +404,8 @@ public class TDD {
         character.experience = 0;
         int damageTaken = game.takeDamage(character, 9);
         assertEquals(6, damageTaken);
-        assertEquals(3, character.experience);
-        assertEquals(3, character.health);
+        assertEquals(1, character.experience);
+        assertEquals(0, character.health);
     }
 
     // Test case 3: Take damage greater than health when health = 9
@@ -378,10 +415,9 @@ public class TDD {
         character.health = 9;
         character.protection = 3;
         character.experience = 0;
-        int damageTaken = game.takeDamage(character, 13);
-        assertEquals(9, damageTaken);
-        assertEquals(5, character.experience);
-        assertEquals(0, character.health);
+        int damageTaken = game.dealDamage(character);
+        assertEquals(7, damageTaken);
+        assertEquals(2, character.experience);
+        assertEquals(-1, character.health);
     }
-
 }
