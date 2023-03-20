@@ -1,12 +1,12 @@
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import static org.junit.Assert.assertEquals;
 
 import java.lang.reflect.Constructor;
 import java.util.Arrays;
 import java.util.Collection;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
-import static org.junit.Assert.*;
 
 @RunWith(Parameterized.class)
 public class BlackBoxGiven {
@@ -47,12 +47,12 @@ public class BlackBoxGiven {
     // normal experience when healthy
     @Test
     public void dealtDamageNormalExperience() {
-        Wizard wiz = new Wizard();
-        Barbarian bar = new Barbarian();
-        Bard bard = new Bard();
-        Druid dru = new Druid();
-        Ranger ran = new Ranger();
-        Rogue ro = new Rogue();
+        final Wizard wiz = new Wizard();
+        final Barbarian bar = new Barbarian();
+        final Bard bard = new Bard();
+        final Druid dru = new Druid();
+        final Ranger ran = new Ranger();
+        final Rogue ro = new Rogue();
 
         game.dealDamage(wiz);
         assertEquals(wiz.experience, 5);
