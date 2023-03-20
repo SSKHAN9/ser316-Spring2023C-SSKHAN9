@@ -50,15 +50,7 @@ public class GamePlay implements GamePlayInterface {
      */
     @Override
     public boolean addOpponent(Character opponent) {
-<<<<<<< HEAD
-<<<<<<< HEAD
         return opponents.add(opponent);
-=======
-       return Opponents.add(opponent);
->>>>>>> e1c865f4f0dd1cf6b9e16b1f8a2d2589afae4b52
-=======
-        return this.Opponents.add(opponent);
->>>>>>> Dev
     }
 
     /**
@@ -165,77 +157,28 @@ public class GamePlay implements GamePlayInterface {
      */
     @Override
     public boolean levelUp(Character character) {
-<<<<<<< HEAD
         boolean upgrade = false; //added boolean to return true if character levels up
-<<<<<<< HEAD
         if (character.experience >= character.pointsPerLevel) {
             upgrade = true;
             if (character.experience == character.pointsPerLevel) {
                 character.experience += 5;
-=======
-        if(character.experience >= character.pointsPerLevel) {
-=======
-        if(character.experience >= character.pointsPerLevel) {
-<<<<<<< HEAD
-        	upgrade = true;
-            if(character.experience == character.pointsPerLevel)
-                character.experience += 5;
-=======
->>>>>>> e1c865f4f0dd1cf6b9e16b1f8a2d2589afae4b52
-            if(character.experience == character.pointsPerLevel) {
-                character.experience = character.pointsPerLevel + 5;
->>>>>>> Dev
             }
-<<<<<<< HEAD
-=======
->>>>>>> Dev
->>>>>>> e1c865f4f0dd1cf6b9e16b1f8a2d2589afae4b52
 
             character.level++;
             character.pointsPerLevel *= 2; // need more points to level up next time
             character.health = 100; // level up resets health
 
-<<<<<<< HEAD
-            if (character.getClass().getName().equals(Barbarian.class.getName())) {
-                character.damage += 10;
-                character.speed = character.speed + 0.25;
-                character.protection += 2;
-            } else if (character.getClass().getName().equals(Bard.class.getName())) {
-                character.damage += character.damage / 2;
-                character.speed += 0.5;
-                character.protection += character.protection / 2;
-            } else if (character.getClass().getName().equals(Druid.class.getName())) {
-                character.damage += 10;
-                character.speed += 0.25;
-                character.protection += 2;
-            } else if (character.getClass().getName().equals(Ranger.class.getName())) {
-                character.damage += character.damage % 10;
-                character.speed += 0.5;
-                character.protection += character.protection % 5;
-            } else if (character.getClass().getName().equals(Rogue.class.getName())) {
-                character.damage += character.damage / 3;
-                character.speed += 1.25;
-                character.protection += 3;
-            } else if (character.getClass().getName().equals(Wizard.class.getName())) {
-                character.damage += 5;
-                character.speed += 1;
-                character.protection += 1;
-            } else {
-                character.damage++;
-                character.speed += 0.25;
-                character.protection++;
-=======
             String characterClassName = character.getClass().getName();
-            switch(characterClassName){
+            switch (characterClassName) {
                 case "Barbarian":
                     character.damage += 10;
                     character.speed += 0.25;
                     character.protection += 2;
                     break;
                 case "Bard":
-                    character.damage += character.damage/2;
+                    character.damage += character.damage / 2;
                     character.speed += 0.5;
-                    character.protection += character.protection/2;
+                    character.protection += character.protection / 2;
                     break;
                 case "Druid":
                     character.damage += 10;
@@ -243,12 +186,12 @@ public class GamePlay implements GamePlayInterface {
                     character.protection += 2;
                     break;
                 case "Ranger":
-                    character.damage += character.damage%10;
+                    character.damage += character.damage % 10;
                     character.speed += 0.5;
-                    character.protection += character.protection%5;
+                    character.protection += character.protection % 5;
                     break;
                 case "Rogue":
-                    character.damage += character.damage/3;
+                    character.damage += character.damage / 3;
                     character.speed += 1.25;
                     character.protection += 3;
                     break;
@@ -262,7 +205,6 @@ public class GamePlay implements GamePlayInterface {
                     character.speed += 0.25;
                     character.protection++;
                     break;
->>>>>>> Dev
             }
             levelUp(character);
         }
