@@ -51,7 +51,11 @@ public class GamePlay implements GamePlayInterface {
     @Override
     public boolean addOpponent(Character opponent) {
 <<<<<<< HEAD
+<<<<<<< HEAD
         return opponents.add(opponent);
+=======
+       return Opponents.add(opponent);
+>>>>>>> e1c865f4f0dd1cf6b9e16b1f8a2d2589afae4b52
 =======
         return this.Opponents.add(opponent);
 >>>>>>> Dev
@@ -163,16 +167,29 @@ public class GamePlay implements GamePlayInterface {
     public boolean levelUp(Character character) {
 <<<<<<< HEAD
         boolean upgrade = false; //added boolean to return true if character levels up
+<<<<<<< HEAD
         if (character.experience >= character.pointsPerLevel) {
             upgrade = true;
             if (character.experience == character.pointsPerLevel) {
                 character.experience += 5;
 =======
         if(character.experience >= character.pointsPerLevel) {
+=======
+        if(character.experience >= character.pointsPerLevel) {
+<<<<<<< HEAD
+        	upgrade = true;
+            if(character.experience == character.pointsPerLevel)
+                character.experience += 5;
+=======
+>>>>>>> e1c865f4f0dd1cf6b9e16b1f8a2d2589afae4b52
             if(character.experience == character.pointsPerLevel) {
                 character.experience = character.pointsPerLevel + 5;
 >>>>>>> Dev
             }
+<<<<<<< HEAD
+=======
+>>>>>>> Dev
+>>>>>>> e1c865f4f0dd1cf6b9e16b1f8a2d2589afae4b52
 
             character.level++;
             character.pointsPerLevel *= 2; // need more points to level up next time
