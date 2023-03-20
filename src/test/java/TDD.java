@@ -1,17 +1,8 @@
-package test.java;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import main.java.Character;
-import main.java.GamePlay;
-import main.java.Wizard;
-import main.java.Barbarian;
-import main.java.Bard;
-import main.java.Druid;
-import main.java.Ranger;
-import main.java.Rogue;
 
 public class TDD {
 	

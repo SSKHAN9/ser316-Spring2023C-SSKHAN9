@@ -1,4 +1,4 @@
-package main.java;
+
 
 public class Character {
     public int health=100;
