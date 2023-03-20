@@ -235,7 +235,7 @@ public class GamePlay implements GamePlayInterface {
     public void attack(Character character, Character opponent) {
         if (character.health > 0 && opponent.health > 0) {
             int damageDealt = dealDamage(character);
-            int damageTaken = takeDamage(opponent, damageDealt);
+            takeDamage(opponent, damageDealt); //SER316 TASK 2 SPOTBUGS FIX
             levelUp(character);
             if (opponent.health <= 0) {
                 opponent.health = 0;
@@ -243,7 +243,7 @@ public class GamePlay implements GamePlayInterface {
             if (opponent.health > 0) {
                 levelUp(opponent);
                 damageDealt = dealDamage(opponent);
-                damageTaken = takeDamage(character, damageDealt);
+                takeDamage(character, damageDealt); //SER316 TASK 2 SPOTBUGS FIX
                 levelUp(opponent);
             }
             if (character.health <= 0) {
