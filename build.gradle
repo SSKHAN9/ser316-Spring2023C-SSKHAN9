@@ -46,7 +46,11 @@ jacocoTestReport {
 /////////////////////////////////////////////////////////////////////
  apply plugin: 'checkstyle'
  checkstyle {
+<<<<<<< HEAD
   // Keep checkstyle a little quieter
+=======
+   // Keep checkstyle a little quieter
+>>>>>>> Dev
    ignoreFailures = true
    showViolations = false
  }

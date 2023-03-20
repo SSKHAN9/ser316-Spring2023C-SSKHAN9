@@ -9,9 +9,21 @@ name: Java CI with Gradle
 
 on:
   push:
+<<<<<<< HEAD
     branches: [ "StaticAnalysis" ]
   pull_request:
     branches: [ "StaticAnalysis" ]
+=======
+<<<<<<< HEAD
+    branches: [ "Review" ]
+  pull_request:
+    branches: [ "Review" ]
+=======
+    branches: [ "Blackbox" ]
+  pull_request:
+    branches: [ "Blackbox" ]
+>>>>>>> origin/Dev
+>>>>>>> Dev
 
 permissions:
   contents: read
@@ -28,6 +40,8 @@ jobs:
       with:
         java-version: '18.0.2'
         distribution: 'temurin'
+    - name: Change wrapper permissions
+      run: chmod +x ./gradlew
     - name: Build with Gradle
       uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
       with:
