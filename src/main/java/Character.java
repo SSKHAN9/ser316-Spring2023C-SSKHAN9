@@ -1,11 +1,13 @@
+package main.java;
+
 public class Character {
-    int health=100;
-    int level=1;
-    int experience=0;
-    int protection=0;
-    int damage=0;
-    double speed=0.0;
-    int pointsPerLevel=100;
+    public int health=100;
+    public int level=1;
+    public int experience=0;
+    public int protection=0;
+    public int damage=0;
+    public double speed=0.0;
+    public int pointsPerLevel=100;
 
     public void printInfo() {
         System.out.println("Class: " + this.getClass().toString());

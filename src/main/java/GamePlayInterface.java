@@ -1,3 +1,5 @@
+package main.java;
+
 public interface GamePlayInterface {
 
     public boolean addOpponent(Character opponent);

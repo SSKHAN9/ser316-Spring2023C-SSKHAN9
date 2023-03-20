@@ -1,3 +1,5 @@
+package main.java;
+
 public class Druid extends Character {
 
     public Druid() {
