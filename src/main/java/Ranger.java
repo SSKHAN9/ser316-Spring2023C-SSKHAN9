@@ -8,5 +8,11 @@ public class Ranger extends Character {
         speed = 2.5;
         pointsPerLevel = 15;
     }
+    @Override
+    public void levelUp() {
+        damage += damage % 10;
+        speed += 0.5;
+        protection += protection % 5;
+    }
 
 }

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="WhiteBoxGiven" tests="9" skipped="0" failures="0" errors="0" timestamp="2023-03-20T19:44:50" hostname="Saads-MacBook-Pro.local" time="0.015">
+<testsuite name="WhiteBoxGiven" tests="9" skipped="0" failures="0" errors="0" timestamp="2023-04-28T14:27:46" hostname="Saads-MacBook-Pro.local" time="0.005">
   <properties/>
-  <testcase name="testGamePlayDefaultConstructor" classname="WhiteBoxGiven" time="0.011"/>
-  <testcase name="testAddOpponent" classname="WhiteBoxGiven" time="0.001"/>
+  <testcase name="testGamePlayDefaultConstructor" classname="WhiteBoxGiven" time="0.002"/>
+  <testcase name="testAddOpponent" classname="WhiteBoxGiven" time="0.0"/>
   <testcase name="equalDp" classname="WhiteBoxGiven" time="0.0"/>
   <testcase name="testGamePlayParameterizedConstructor" classname="WhiteBoxGiven" time="0.0"/>
-  <testcase name="testLevelUp" classname="WhiteBoxGiven" time="0.0"/>
-  <testcase name="testPlayPlayerSpeedLessOrEqual" classname="WhiteBoxGiven" time="0.001"/>
+  <testcase name="testLevelUp" classname="WhiteBoxGiven" time="0.001"/>
+  <testcase name="testPlayPlayerSpeedLessOrEqual" classname="WhiteBoxGiven" time="0.0"/>
   <testcase name="testRemoveOpponent" classname="WhiteBoxGiven" time="0.0"/>
   <testcase name="testGamePlayParameterizedConstructorWithOpponent" classname="WhiteBoxGiven" time="0.0"/>
   <testcase name="testPlayPlayerSpeedGreater" classname="WhiteBoxGiven" time="0.0"/>

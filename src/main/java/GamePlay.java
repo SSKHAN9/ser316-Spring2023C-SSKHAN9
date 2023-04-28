@@ -157,7 +157,7 @@ public class GamePlay implements GamePlayInterface {
      */
     @Override
     public boolean levelUp(Character character) {
-        boolean upgrade = false; //added boolean to return true if character levels up
+        boolean upgrade = false;
         if (character.experience >= character.pointsPerLevel) {
             upgrade = true;
             if (character.experience == character.pointsPerLevel) {
@@ -165,48 +165,10 @@ public class GamePlay implements GamePlayInterface {
             }
 
             character.level++;
-            character.pointsPerLevel *= 2; // need more points to level up next time
-            character.health = 100; // level up resets health
+            character.pointsPerLevel *= 2;
+            character.health = 100;
 
-            String characterClassName = character.getClass().getName();
-            switch (characterClassName) {
-                case "Barbarian":
-                    character.damage += 10;
-                    character.speed += 0.25;
-                    character.protection += 2;
-                    break;
-                case "Bard":
-                    character.damage += character.damage / 2;
-                    character.speed += 0.5;
-                    character.protection += character.protection / 2;
-                    break;
-                case "Druid":
-                    character.damage += 10;
-                    character.speed += 0.25;
-                    character.protection += 2;
-                    break;
-                case "Ranger":
-                    character.damage += character.damage % 10;
-                    character.speed += 0.5;
-                    character.protection += character.protection % 5;
-                    break;
-                case "Rogue":
-                    character.damage += character.damage / 3;
-                    character.speed += 1.25;
-                    character.protection += 3;
-                    break;
-                case "Wizard":
-                    character.damage += 5;
-                    character.speed += 1;
-                    character.protection += 1;
-                    break;
-                default:
-                    character.damage++;
-                    character.speed += 0.25;
-                    character.protection++;
-                    break;
-            }
-            levelUp(character);
+            character.levelUp();
         }
 
         return upgrade;

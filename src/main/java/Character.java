@@ -20,4 +20,10 @@ public class Character {
         System.out.println("Points per Level: " + pointsPerLevel);
         System.out.println("\n");
     }
+
+    public void levelUp() {
+        damage++;
+        speed += 0.25;
+        protection++;
+    }
 }

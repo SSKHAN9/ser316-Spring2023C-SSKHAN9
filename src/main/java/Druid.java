@@ -8,5 +8,11 @@ public class Druid extends Character {
         speed = 3.0;
         pointsPerLevel = 15;
     }
+    @Override
+    public void levelUp() {
+        damage += 10;
+        speed += 0.25;
+        protection += 2;
+    }
 
 }
